@@ -1,0 +1,32 @@
+{% extends "my_top_tens/base.html" %}
+
+{% block page_header %}
+  <div class="p-4 bg-light border rounded">
+    <h1 class="display-4">{{ topic.text }}</h1>
+    {% if topic.description %}
+      <p class="lead">Description: {{ topic.description }}</p>
+    {% endif %}
+    <a href="{% url 'my_top_tens:edit_topic_description' topic.id %}" class="btn btn-primary">Edit Topic Name or Description</a>
+  </div>
+{% endblock page_header %}
+
+{% block content %}
+  <h3 class="mt-4">Top-Ten List:</h3>
+  <div class="list-group mb-4">
+    {% for entry in entries %}
+      <div class="list-group-item">
+        <h5 class="mb-1">
+          <strong>Rank {{ entry.rank }}:</strong> {{ entry.text }}
+        </h5>
+        {% if entry.description %}
+          <p class="mb-0 text-muted">Comments: {{ entry.description }}</p>
+        {% endif %}
+      </div>
+    {% empty %}
+      <p class="text-muted">No items have been ranked yet.</p>
+    {% endfor %}
+  </div>
+
+  <a href="{% url 'my_top_tens:manage_ranks' topic.id %}" class="btn btn-success mb-4">Add or Edit Ranks</a>
+{% endblock content %}
+

@@ -1,0 +1,27 @@
+{% extends 'my_top_tens/base.html' %}
+
+{% block page_header %}
+  <h1 class="text-center">Topics</h1>
+{% endblock page_header %}
+
+{% block content %}
+  <div class="container">
+    <ul class="list-group border-bottom pb-2 mb-4">
+      {% for topic in topics %}
+        <li class="list-group-item border-0 d-flex justify-content-between align-items-center">
+          <a href="{% url 'my_top_tens:topic' topic.id %}" class="text-decoration-none text-primary fs-5">
+            {{ topic.text }}
+          </a>
+          <span class="badge bg-secondary">{{ topic.date_added|date:"M d, Y" }}</span>
+        </li>
+      {% empty %}
+        <li class="list-group-item border-0 text-center">No topics have been added yet.</li>
+      {% endfor %}
+    </ul>     
+
+    <div class="d-flex justify-content-between">
+      <a href="{% url 'my_top_tens:new_topic' %}" class="btn btn-primary">Add a new topic</a>
+      <a href="{% url 'my_top_tens:select_topic_to_delete' %}" class="btn btn-danger">Delete a topic</a>
+    </div>
+  </div>
+{% endblock content %}

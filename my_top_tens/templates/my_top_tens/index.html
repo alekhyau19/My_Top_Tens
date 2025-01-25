@@ -1,0 +1,24 @@
+{% extends 'my_top_tens/base.html' %}
+
+{% block page_header %}
+  <div class = "p-3 mb-4 bg-light border rounded-3">
+    <div class="container-fluid py-4">
+      <h1 class="display-3"> Rank your favorites.</h1>
+
+      <p class="lead">My Top Tens allows you to create, organize, and customize your top-ten lists for any topic you choose. Whether it's your favorite songs, movies, or restaurants, you can easily add a topic, rank your items, and include comments or descriptions to make your lists uniquely yours. Stay organized and revisit your lists anytime to update or refine them. </p>
+      
+      {% if user.is_authenticated %}
+        <!-- If the user is logged in -->
+        <a class="btn btn-success btn-lg mt-1" href="{% url 'my_top_tens:topics' %}">View Your Topics &raquo;</a>
+      {% else %}
+        <a class="btn btn-primary btn-lg mt-1" href="{% url 'accounts:register' %}">Register &raquo;</a>
+        <p class="mt-2 mb-0">
+          <small>
+            Already have an account? 
+            <a href="{% url 'accounts:login' %}">Log in</a>
+          </small>
+        </p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock page_header %}

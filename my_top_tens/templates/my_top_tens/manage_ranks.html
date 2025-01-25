@@ -1,0 +1,16 @@
+{% extends "my_top_tens/base.html" %}
+
+{% block content %}
+  <h2>Edit Your Top Ten Ranks for {{ topic.text }}</h2>
+  
+  <form action="{% url 'my_top_tens:manage_ranks' topic.id %}" method="post">
+    {% csrf_token %}
+    {% for form_dict in forms %}
+      <div>
+        <h3>Rank {{ form_dict.rank }}</h3>
+        {{ form_dict.form.as_p }}
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary mb-3">Save Ranks</button>
+  </form>
+{% endblock content %}

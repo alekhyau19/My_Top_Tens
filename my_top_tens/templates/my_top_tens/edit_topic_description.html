@@ -1,0 +1,10 @@
+{% extends "my_top_tens/base.html" %}
+
+{% block content %}
+  <h2>Edit Description for "{{ topic.text }}"</h2>
+  <form action="{% url 'my_top_tens:edit_topic_description' topic.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary mb-3">Save Changes</button>
+  </form>
+{% endblock content %}
